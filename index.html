@@ -650,9 +650,22 @@ function renderNav() {
     const li = document.createElement('li');
     li.textContent = sec.title;
     li.dataset.id = sec.id;
-    li.onclick = () => showSection(sec.id);
+    li.onclick = () => goSection(sec.id);
     ul.appendChild(li);
   });
+}
+function resetScroll() {
+  const opts = { top: 0, left: 0, behavior: 'instant' };
+  try { window.scrollTo(opts); } catch (e) { window.scrollTo(0, 0); }
+  if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  document.querySelectorAll('.content, #content, .main').forEach(el => { el.scrollTop = 0; });
+}
+function goSection(id) {
+  showSection(id);
+  resetScroll();
+  requestAnimationFrame(resetScroll);
 }
 function showSection(id) {
   document.querySelectorAll('.nav-list li').forEach(li => li.classList.toggle('active', li.dataset.id === id));
@@ -832,7 +845,7 @@ function renderHome() {
     const card = document.createElement('div');
     card.className = 'overview-card';
     card.innerHTML = `<strong>${c.t}</strong><br>${c.d}`;
-    card.onclick = () => showSection(c.id);
+    card.onclick = () => goSection(c.id);
     ov.appendChild(card);
   });
 }
