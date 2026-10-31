@@ -372,6 +372,17 @@ body {
 :root:not([data-theme="dark"]) .content input[type="text"], :root:not([data-theme="dark"]) .content input:not([type]) { background: #fff; border: 1px solid #d0d7de; color: var(--text); }
 :root:not([data-theme="dark"]) .cert-card { background: linear-gradient(180deg, #ffffff, #f6faff); border-color: #0969da; box-shadow: 0 8px 24px -8px rgba(9,105,218,.25); }
 :root:not([data-theme="dark"]) .highlight[style*="#007aff"] { background: #0062cc !important; }
+/* ===== v13 dark-mode contrast fixes (light mode untouched) ===== */
+[data-theme="dark"] .step h3 { color: #60a5fa; }
+[data-theme="dark"] .os-toggle button, [data-theme="dark"] .theme-toggle button { color: #cbd5e1; }
+[data-theme="dark"] .os-toggle button.active, [data-theme="dark"] .theme-toggle button.active { background: #2563eb; color: #fff; }
+[data-theme="dark"] .nav-list li.active { background: linear-gradient(135deg, #1d4ed8, #2563eb); }
+[data-theme="dark"] #btn-check { background: #2563eb !important; }
+[data-theme="dark"] .reset-btn { color: #f87171; border-color: #f87171; }
+[data-theme="dark"] .reset-btn:hover { background: #dc2626; border-color: #dc2626; color: #fff; }
+[data-theme="dark"] .real-shot .shot-tag { background: #c9252c; }
+[data-theme="dark"] .highlight[style*="#007aff"] { background: #0062cc !important; }
+.step.check-form::before { display: none; }
 </style>
 </head>
 <body>
@@ -906,7 +917,7 @@ function renderCheck() {
   goal.textContent = '請輸入你的 GitHub 帳號與倉庫名稱（建議使用 my-git-practice），系統會用公開 API 檢查是否符合要求。';
   section.appendChild(goal);
   const step = document.createElement('div');
-  step.className = 'step';
+  step.className = 'step check-form';
   step.innerHTML = `
     <label>GitHub 帳號（owner）</label><br>
     <input id="gh-owner" placeholder="例如 octocat" style="width:100%; padding:10px; margin:8px 0; border-radius:10px; background:var(--surface-2); border:1px solid var(--border); color:var(--text);">
