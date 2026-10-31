@@ -383,6 +383,33 @@ body {
 [data-theme="dark"] .real-shot .shot-tag { background: #c9252c; }
 [data-theme="dark"] .highlight[style*="#007aff"] { background: #0062cc !important; }
 .step.check-form::before { display: none; }
+
+/* v14 force-push caution panel */
+.force-panel { margin: 8px 0 24px; padding: 22px 24px; border-radius: var(--radius); background: #fff7ed; border: 1px solid #fed7aa; border-left: 5px solid #c2410c; color: var(--text); box-shadow: var(--shadow-sm); line-height: 1.75; }
+.force-panel .fp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.force-panel .fp-icon { flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; background: #c2410c; color: #fff; }
+.force-panel .fp-icon .icon { width: 20px; height: 20px; }
+.force-panel h2 { font-size: 20px; color: #9a3412; line-height: 1.3; }
+.force-panel .fp-sub { font-size: 13.5px; color: #7c2d12; margin-top: 2px; }
+.force-panel h4 { font-size: 16px; margin: 18px 0 6px; color: #9a3412; }
+.force-panel p { margin: 6px 0; }
+.force-panel code { font-family: 'Cascadia Mono', Consolas, Menlo, monospace; font-size: .9em; background: #fbe4d3; color: #7c2d12; padding: 1px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+.force-panel .fp-small { font-size: 14px; color: var(--text-dim); }
+.force-panel .fp-list { list-style: none; margin: 8px 0; padding: 0; }
+.force-panel .fp-list li { display: flex; gap: 10px; align-items: flex-start; margin: 6px 0; }
+.force-panel .fp-li-ico { flex: 0 0 20px; height: 20px; margin-top: 4px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.force-panel .fp-li-ico .icon { width: 12px; height: 12px; }
+.force-panel li.bad .fp-li-ico { background: #cf222e; }
+.force-panel li.good .fp-li-ico { background: #1a7f37; }
+[data-theme="dark"] .force-panel { background: #2a1a0e; border-color: #7c2d12; border-left-color: #fb923c; }
+[data-theme="dark"] .force-panel .fp-icon { background: #ea580c; color: #fff; }
+[data-theme="dark"] .force-panel h2, [data-theme="dark"] .force-panel h4 { color: #fdba74; }
+[data-theme="dark"] .force-panel .fp-sub { color: #fed7aa; }
+[data-theme="dark"] .force-panel code { background: #44291a; color: #fed7aa; }
+[data-theme="dark"] .force-panel .fp-small { color: #cbd5e1; }
+[data-theme="dark"] .force-panel li.bad .fp-li-ico { background: #dc2626; }
+[data-theme="dark"] .force-panel li.good .fp-li-ico { background: #16a34a; }
+@media (max-width: 600px) { .force-panel { padding: 16px; } }
 </style>
 </head>
 <body>
@@ -454,7 +481,7 @@ const CONTENT = {
     steps: [
       { title: '先到桌面再 Clone', desc: '先切換到桌面，再 clone。公開倉庫 clone 不需要登入。', folder: '任意位置', cmd: { win: 'cd ~\\Desktop\ngit clone https://github.com/你的帳號/my-git-practice.git\ncd my-git-practice', mac: 'cd ~/Desktop\ngit clone https://github.com/你的帳號/my-git-practice.git\ncd my-git-practice' }, expected: 'Cloning into \'my-git-practice\'...\nremote: Enumerating objects: ...\ndone.', faq: { win: '若提示認證：會跳出 Git Credential Manager，請選 Sign in with your browser。', mac: '若提示認證：請使用 Personal Access Token（Username 填帳號，Password 貼 token）。' }, type: 'term', extra: 'clone-code' },
       { title: '修改檔案並查看狀態', desc: '建立一個檔案，然後查看狀態。', folder: 'my-git-practice 資料夾內', cmd: { win: 'Set-Content -Path note.txt -Value "Hello from my computer" -Encoding utf8\ngit status', mac: 'echo "Hello from my computer" > note.txt\ngit status' }, expected: 'On branch main\nUntracked files:\n  note.txt', faq: { win: '如果檔案沒出現，確認你在正確的資料夾（用 Get-Location 查看目前位置）。', mac: '如果檔案沒出現，確認你在正確的資料夾（用 pwd 查看目前位置）。' }, type: 'term' },
-      { title: 'Add、Commit 並 Push', desc: { win: '把檔案加入暫存區、提交，然後推送到 GitHub。第一次 push 時會跳出瀏覽器登入。', mac: '把檔案加入暫存區、提交，然後推送到 GitHub。請把 Personal Access Token 貼在密碼欄（之後會存進鑰匙圈）。' }, folder: 'my-git-practice 資料夾內', cmd: { win: 'git add note.txt\ngit commit -m "新增 note.txt"\ngit push', mac: 'git add note.txt\ngit commit -m "新增 note.txt"\ngit push' }, expected: '[main abc1234] 新增 note.txt\n 1 file changed, 1 insertion(+)\n\nTo https://github.com/你的帳號/my-git-practice.git\n   def5678..abc1234  main -> main', faq: { win: '第一次 push 會跳出 Git Credential Manager，請選 Sign in with your browser，並在瀏覽器按 Authorize 授權。', mac: '建立 Token：GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token，勾選 repo 權限。Push 時 Username 填帳號，Password 貼 token。' }, type: 'term', extra: 'auth' }
+      { title: 'Add、Commit 並 Push', desc: { win: '把檔案加入暫存區、提交，然後推送到 GitHub。第一次 push 時會跳出瀏覽器登入。', mac: '把檔案加入暫存區、提交，然後推送到 GitHub。請把 Personal Access Token 貼在密碼欄（之後會存進鑰匙圈）。' }, folder: 'my-git-practice 資料夾內', cmd: { win: 'git add note.txt\ngit commit -m "新增 note.txt"\ngit push', mac: 'git add note.txt\ngit commit -m "新增 note.txt"\ngit push' }, expected: '[main abc1234] 新增 note.txt\n 1 file changed, 1 insertion(+)\n\nTo https://github.com/你的帳號/my-git-practice.git\n   def5678..abc1234  main -> main', faq: { win: '第一次 push 會跳出 Git Credential Manager，請選 Sign in with your browser，並在瀏覽器按 Authorize 授權。若 push 出現 ! [rejected] main -> main (fetch first)，請先 git pull --no-rebase 再 push，詳見「實作4」頁面下方的「關於 git push --force」。', mac: '建立 Token：GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token，勾選 repo 權限。Push 時 Username 填帳號，Password 貼 token。若 push 出現 ! [rejected] main -> main (fetch first)，請先 git pull --no-rebase 再 push，詳見「實作4」頁面下方的「關於 git push --force」。' }, type: 'term', extra: 'auth' }
     ],
     summary: '你已成功把本機的修改推送到 GitHub。'
   },
@@ -469,8 +496,8 @@ const CONTENT = {
   p4: {
     goal: '在 GitHub 建立一個空的 my-local-project 倉庫（Add README 保持 Off），再把本地倉庫推送上去。',
     steps: [
-      { title: '在 GitHub 建立空倉庫', desc: '到 GitHub 建立新 repository，名稱填 my-local-project，選 Public，Add README 保持 Off（不要切到 On），直接 Create repository。', folder: '瀏覽器', web: true, expected: '看到空倉庫頁面，並有 ...or push an existing repository from the command line 的提示。', faq: 'Add README 一定要保持 Off，否則會出現 rejected (fetch first)。', type: 'github-empty' },
-      { title: '連接遠端並 Push', desc: '在 my-local-project 資料夾內執行以下指令（把帳號換成你的）。', folder: 'my-local-project 資料夾內', cmd: { win: 'git remote add origin https://github.com/你的帳號/my-local-project.git\ngit push -u origin main', mac: 'git remote add origin https://github.com/你的帳號/my-local-project.git\ngit push -u origin main' }, expected: 'To https://github.com/你的帳號/my-local-project.git\n * [new branch]      main -> main\nbranch \'main\' set up to track \'origin/main\'.', faq: '若顯示 rejected，請確認遠端倉庫是空的（沒有 README）。', type: 'term' }
+      { title: '在 GitHub 建立空倉庫', desc: '到 GitHub 建立新 repository，名稱填 my-local-project，選 Public，Add README 保持 Off（不要切到 On），直接 Create repository。', folder: '瀏覽器', web: true, expected: '看到空倉庫頁面，並有 ...or push an existing repository from the command line 的提示。', faq: 'Add README 一定要保持 Off，否則 push 時會出現 ! [rejected] main -> main (fetch first)。若已經發生，請看本頁下方「關於 git push --force」的正確處理方式，不要直接使用 --force。', type: 'github-empty' },
+      { title: '連接遠端並 Push', desc: '在 my-local-project 資料夾內執行以下指令（把帳號換成你的）。', folder: 'my-local-project 資料夾內', cmd: { win: 'git remote add origin https://github.com/你的帳號/my-local-project.git\ngit push -u origin main', mac: 'git remote add origin https://github.com/你的帳號/my-local-project.git\ngit push -u origin main' }, expected: 'To https://github.com/你的帳號/my-local-project.git\n * [new branch]      main -> main\nbranch \'main\' set up to track \'origin/main\'.', faq: '若顯示 ! [rejected] main -> main (fetch first)，代表遠端已有你本機沒有的提交（例如建立倉庫時把 Add README 切到 On）。請看本頁下方「關於 git push --force」的正確處理方式，不要直接使用 --force。', type: 'term' }
     ],
     summary: '你已成功把本地倉庫推送到 GitHub 的空倉庫。'
   },
@@ -722,6 +749,56 @@ function goSection(id) {
   resetScroll();
   requestAnimationFrame(resetScroll);
 }
+
+function makeCopyBlock(cmdText) {
+  const b = document.createElement('div');
+  b.className = 'cmd-block';
+  b.innerHTML = highlightCmd(cmdText);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = '複製';
+  btn.onclick = () => { navigator.clipboard.writeText(cmdText).then(() => { btn.textContent = '已複製'; setTimeout(() => btn.textContent = '複製', 1500); }); };
+  b.appendChild(btn);
+  return b;
+}
+const SVG_ALERT = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></svg>';
+const SVG_X = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" class="icon" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+const SVG_CHECK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+function makeForcePanel() {
+  const p = document.createElement('section');
+  p.className = 'force-panel';
+  const li = (ic, cls, t) => `<li class="${cls}"><span class="fp-li-ico">${ic}</span><span>${t}</span></li>`;
+  p.innerHTML = `
+    <div class="fp-head"><span class="fp-icon">${SVG_ALERT}</span><div><h2>關於 git push --force</h2><p class="fp-sub">延伸說明：本段只需閱讀，不需要實際執行 --force。</p></div></div>
+    <h4>1. Push 被拒絕時會看到什麼</h4>
+    <p>如果遠端（GitHub）上有你本機沒有的提交，例如建立倉庫時把 Add README 切到 On，或同學先推送了新的修改，git push 會被拒絕：</p>
+    <div class="fp-term"></div>
+    <p><code>(fetch first)</code> 表示遠端有你還沒下載的提交；如果你已經 fetch 過但還沒合併，訊息會變成 <code>(non-fast-forward)</code>。兩者意思相同：<strong>你的本機落後遠端</strong>，Git 為了保護遠端的內容而拒絕推送。</p>
+    <h4>2. 正確做法：先 pull，再 push</h4>
+    <p>先把遠端的提交下載並合併到本機，若有衝突就依「實作7」的方式解決，最後再推送。</p>
+    <div class="fp-cmd-pull"></div>
+    <p class="fp-small">新版 Git 在雙方都有新提交時，單打 git pull 可能出現 <code>fatal: Need to specify how to reconcile divergent branches.</code>，加上 <code>--no-rebase</code> 即表示用合併（merge）的方式整合，<code>--no-edit</code> 則直接使用預設的合併訊息，不會開啟文字編輯器。若是本機 git init 的倉庫遇到遠端只多了 README 的情況，第一次 pull 需改用 <code>git pull --no-rebase --no-edit --allow-unrelated-histories origin main</code>。</p>
+    <h4>3. --force 會做什麼</h4>
+    <p><code>git push --force</code> 會<strong>用你本機的歷史直接覆蓋遠端</strong>，不管遠端多了什麼。</p>
+    <ul class="fp-list">
+      ${li(SVG_X,'bad','遠端上你本機沒有的提交會被刪除，其他人的成果可能就此消失。')}
+      ${li(SVG_X,'bad','已經 pull 過舊歷史的協作者，之後 pull 或 push 都會出錯，難以復原。')}
+      ${li(SVG_X,'bad','看到 rejected 就用 --force「解決」，等於把問題轉嫁給所有協作者。')}
+    </ul>
+    <h4>4. 比較安全的替代：--force-with-lease</h4>
+    <p><code>--force-with-lease</code> 只有在遠端仍是你上次看到的狀態時才會覆蓋；若期間有人推送了新提交，它會拒絕，避免誤刪別人的成果。</p>
+    <div class="fp-cmd-lease"></div>
+    <ul class="fp-list">
+      ${li(SVG_CHECK,'good','可以使用的情況：<strong>只有你自己在用的分支</strong>，且你刻意改寫了歷史（例如 git commit --amend 或 git rebase 之後）。')}
+      ${li(SVG_X,'bad','不可以使用的情況：<strong>main 或任何與他人共用的分支</strong>，一律不要 force push。')}
+    </ul>
+    <h4>5. GitHub 的保護機制</h4>
+    <p>GitHub 倉庫可以在 Settings → Branches（或 Rules）設定分支保護規則（branch protection），預設會禁止對受保護分支 force push。被擋下時請改用 pull 後再 push，或透過 Pull Request 合併。</p>`;
+  p.querySelector('.fp-term').replaceWith(makeTerminal(state.os, 'git push', "To https://github.com/你的帳號/my-local-project.git\n ! [rejected]        main -> main (fetch first)\nerror: failed to push some refs to 'https://github.com/你的帳號/my-local-project.git'\nhint: Updates were rejected because the remote contains work that you do not\nhint: have locally. This is usually caused by another repository pushing to\nhint: the same ref. If you want to integrate the remote changes, use\nhint: 'git pull' before pushing again.\nhint: See the 'Note about fast-forwards' in 'git push --help' for details."));
+  p.querySelector('.fp-cmd-pull').replaceWith(makeCopyBlock('git pull --no-rebase --no-edit\ngit push'));
+  p.querySelector('.fp-cmd-lease').replaceWith(makeCopyBlock('git push --force-with-lease'));
+  return p;
+}
 function showSection(id) {
   document.querySelectorAll('.nav-list li').forEach(li => li.classList.toggle('active', li.dataset.id === id));
   const content = document.getElementById('content');
@@ -861,6 +938,7 @@ function showSection(id) {
     timeline.appendChild(stepDiv);
   });
   section.appendChild(timeline);
+  if (id === 'p4') section.appendChild(makeForcePanel());
   const sum = document.createElement('div');
   sum.className = 'summary';
   const ss = document.createElement('strong');
