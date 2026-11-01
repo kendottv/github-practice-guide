@@ -478,6 +478,57 @@ body {
   .mood-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .hop .frog-img, .frog-btn.nudge .frog-img { animation: none !important; } .frog-bubble { animation: none; } }
+
+/* v16 outline meta + cheat sheet */
+.nav-list li .nav-title { display: block; }
+.nav-list li .nav-time { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; margin-top: 3px; color: #475569; }
+[data-theme="dark"] .nav-list li .nav-time { color: #cbd5e1; }
+.nav-list li.active .nav-time { color: #ffffff; }
+.nav-time .icon, .oc-time .icon, .sec-meta .icon { width: 1em; height: 1em; flex: none; }
+.sec-meta { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px 18px; margin: -4px 0 18px; padding: 12px 16px; border-radius: 12px; background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; font-size: 15px; line-height: 1.6; }
+.sec-meta .sm-learn { display: flex; gap: 8px; flex: 1 1 320px; }
+.sec-meta .sm-learn .icon { margin-top: .3em; }
+.sec-meta .sm-time { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; white-space: nowrap; }
+[data-theme="dark"] .sec-meta { background: #172554; border-color: #1e40af; color: #dbeafe; }
+.overview-card .oc-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.overview-card .oc-time { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #dbeafe; color: #1e40af; white-space: nowrap; }
+[data-theme="dark"] .overview-card .oc-time { background: #1e3a8a; color: #dbeafe; }
+.overview-card .oc-learn { font-size: 13.5px; line-height: 1.6; color: #334155; }
+.overview-card .oc-label { font-weight: 700; color: #0f172a; }
+[data-theme="dark"] .overview-card .oc-learn { color: #cbd5e1; }
+[data-theme="dark"] .overview-card .oc-label { color: #f1f5f9; }
+.overview { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important; }
+.cheat-h { font-size: 19px; margin: 26px 0 12px; }
+.cheat-list { display: flex; flex-direction: column; gap: 10px; }
+.cheat-row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+.cheat-row .cmd-block { margin: 0; }
+.cheat-desc { font-size: 14.5px; line-height: 1.6; display: flex; gap: 6px; align-items: flex-start; }
+.cheat-warn { border-color: #f59e0b; background: #fffbeb; }
+.cheat-warn .cheat-desc { color: #78350f; }
+.cw-icon { color: #b45309; flex: none; margin-top: .15em; }
+.cw-icon .icon { width: 1.1em; height: 1.1em; }
+[data-theme="dark"] .cheat-warn { background: #3b2a0a; border-color: #b45309; }
+[data-theme="dark"] .cheat-warn .cheat-desc { color: #fde68a; }
+[data-theme="dark"] .cw-icon { color: #fbbf24; }
+.cheat-note { font-size: 14.5px; color: #475569; margin-bottom: 12px; }
+[data-theme="dark"] .cheat-note { color: #cbd5e1; }
+.osdiff { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: stretch; }
+.od-head { font-weight: 800; font-size: 14px; padding: 8px 10px; border-radius: 8px; background: var(--surface-2); }
+.od-desc { font-size: 14px; padding: 10px; display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+.od-cell { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.od-cell .cmd-block { margin: 0; flex: 1; }
+.od-os { display: none; font-size: 12px; font-weight: 700; color: #475569; }
+[data-theme="dark"] .od-os { color: #cbd5e1; }
+.od-ui { font-size: 13.5px; padding: 10px; border-radius: 10px; background: var(--surface-2); line-height: 1.6; flex: 1; }
+@media (max-width: 900px) {
+  .nav-list li .nav-time { display: none; }
+  .cheat-row { grid-template-columns: 1fr; }
+  .osdiff { grid-template-columns: 1fr 1fr; }
+  .od-head { display: none; }
+  .od-desc { grid-column: 1 / -1; margin-top: 8px; font-weight: 700; }
+  .od-os { display: block; }
+}
+@media (max-width: 480px) { .osdiff { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -514,16 +565,17 @@ body {
 <script>
 const SECTIONS = [
   { id: 'home', title: '首頁' },
-  { id: 'prep', title: '開始前檢查' },
-  { id: 'p1', title: '實作1 在 GitHub 建立 Repo' },
-  { id: 'p2', title: '實作2 Clone 與第一次 Push' },
-  { id: 'p3', title: '實作3 從零 git init' },
-  { id: 'p4', title: '實作4 Remote 與 Push' },
-  { id: 'p5', title: '實作5 用指令建分支與合併' },
-  { id: 'p6', title: '實作6 GitHub 網頁分支與 PR' },
-  { id: 'p7', title: '實作7 製造並解決衝突' },
-  { id: 'gitignore', title: '.gitignore' },
-  { id: 'check', title: '完成檢查' }
+  { id: 'prep', title: '開始前檢查', learn: '確認 Git 版本，並設定 user.name、user.email 與預設分支 main', time: '約 5 分鐘' },
+  { id: 'p1', title: '實作1 在 GitHub 建立 Repo', learn: '在 GitHub 網頁建立公開 Repo，並直接在網頁編輯 README、完成一次 Commit', time: '約 10 分鐘' },
+  { id: 'p2', title: '實作2 Clone 與第一次 Push', learn: '用 git clone 下載倉庫，體驗 status、add、commit、push 的完整流程與第一次登入授權', time: '約 15 分鐘' },
+  { id: 'p3', title: '實作3 從零 git init', learn: '在本機用 git init 從零建立倉庫，完成第一次 Commit 並把分支命名為 main', time: '約 10 分鐘' },
+  { id: 'p4', title: '實作4 Remote 與 Push', learn: '用 git remote add 連接 GitHub 空倉庫並 push -u；了解 rejected 的原因與 --force 的風險', time: '約 15 分鐘' },
+  { id: 'p5', title: '實作5 用指令建分支與合併', learn: '用 git switch -c 建立分支、在分支上提交與推送，再切回 main 合併', time: '約 15 分鐘' },
+  { id: 'p6', title: '實作6 GitHub 網頁分支與 PR', learn: '在 GitHub 網頁建立分支、開 Pull Request 並合併，再用 git pull 同步到本機', time: '約 15 分鐘' },
+  { id: 'p7', title: '實作7 製造並解決衝突', learn: '親手製造 add/add 合併衝突，看懂衝突標記並手動解決後提交', time: '約 20 分鐘' },
+  { id: 'gitignore', title: '.gitignore', learn: '用 .gitignore 排除 .log 等不該提交的檔案，並確認 git status 不再顯示', time: '約 10 分鐘' },
+  { id: 'check', title: '完成檢查', learn: '用 GitHub 公開 API 自動檢查倉庫、提交、分支與 PR 是否完成', time: '約 5 分鐘' },
+  { id: 'cheat', title: '常用指令速查表', learn: '快速查詢本課程用到的常用 Git 指令，以及 Mac 與 Windows 的指令差異', time: '隨時查閱' }
 ];
 
 const CONTENT = {
@@ -793,12 +845,16 @@ function openLightbox(el) {
   lb.classList.add('active');
   lb.onclick = () => lb.classList.remove('active');
 }
+const SVG_CLOCK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>';
+const SVG_CAP = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>';
+function metaHTML(sec) { return '<div class="sec-meta"><span class="sm-learn">' + SVG_CAP + '<span><strong>做完你會學到：</strong>' + escapeHtml(sec.learn) + '</span></span><span class="sm-time">' + SVG_CLOCK + escapeHtml(sec.time) + '</span></div>'; }
 function renderNav() {
   const ul = document.getElementById('nav');
   ul.innerHTML = '';
   SECTIONS.forEach(sec => {
     const li = document.createElement('li');
-    li.textContent = sec.title;
+    li.innerHTML = '<span class="nav-title">' + escapeHtml(sec.title) + '</span>' + (sec.time ? '<span class="nav-time">' + SVG_CLOCK + escapeHtml(sec.time) + '</span>' : '');
+    if (sec.learn) li.title = '做完你會學到：' + sec.learn;
     li.dataset.id = sec.id;
     li.onclick = () => goSection(sec.id);
     ul.appendChild(li);
@@ -990,13 +1046,16 @@ function showSection(id) {
   clearTimeout(nudgeTimer); openBubble = null;
   if (id === 'home') { renderHome(); return; }
   if (id === 'check') { renderCheck(); return; }
+  if (id === 'cheat') { renderCheat(); return; }
   const data = CONTENT[id];
   if (!data) return;
   const section = document.createElement('div');
   section.className = 'section';
   const h1 = document.createElement('h1');
-  h1.textContent = SECTIONS.find(s=>s.id===id).title;
+  const secObj = SECTIONS.find(s=>s.id===id);
+  h1.textContent = secObj.title;
   section.appendChild(h1);
+  if (secObj.learn) section.insertAdjacentHTML('beforeend', metaHTML(secObj));
   const goal = document.createElement('div');
   goal.className = 'goal';
   const gs = document.createElement('strong');
@@ -1142,20 +1201,13 @@ function renderHome() {
     </div>
   `;
   const ov = document.getElementById('overview');
-  const cards = [
-    { id: 'p1', t: '實作 1', d: '在 GitHub 建立 Repo' },
-    { id: 'p2', t: '實作 2', d: 'Clone 與第一次 Push' },
-    { id: 'p3', t: '實作 3', d: '從零 git init' },
-    { id: 'p4', t: '實作 4', d: 'Remote 與 Push' },
-    { id: 'p5', t: '實作 5', d: '指令建分支與合併' },
-    { id: 'p6', t: '實作 6', d: '網頁分支與 PR' },
-    { id: 'p7', t: '實作 7', d: '製造並解決衝突' }
-  ];
-  cards.forEach(c => {
+  SECTIONS.filter(x => x.id !== 'home').forEach((c, n) => {
     const card = document.createElement('div');
     card.className = 'overview-card';
-    card.innerHTML = `<strong>${c.t}</strong><br>${c.d}`;
+    card.tabIndex = 0;
+    card.innerHTML = '<div class="oc-head"><strong>' + escapeHtml(c.title) + '</strong><span class="oc-time">' + SVG_CLOCK + escapeHtml(c.time) + '</span></div><div class="oc-learn"><span class="oc-label">做完你會學到：</span>' + escapeHtml(c.learn) + '</div>';
     card.onclick = () => goSection(c.id);
+    card.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goSection(c.id); } };
     ov.appendChild(card);
   });
   renderHomeExtras();
@@ -1168,6 +1220,7 @@ function renderCheck() {
   const h1 = document.createElement('h1');
   h1.textContent = '完成檢查';
   section.appendChild(h1);
+  section.insertAdjacentHTML('beforeend', metaHTML(SECTIONS.find(s=>s.id==='check')));
   const goal = document.createElement('div');
   goal.className = 'goal';
   goal.textContent = '請輸入你的 GitHub 帳號與倉庫名稱（建議使用 my-git-practice），系統會用公開 API 檢查是否符合要求。';
@@ -1187,6 +1240,75 @@ function renderCheck() {
   section.appendChild(step);
   content.appendChild(section);
   document.getElementById('btn-check').onclick = runCheck;
+}
+
+const CHEAT = [
+  { g: '設定與建立', items: [
+    { c: 'git config --global user.name "你的名字"', d: '設定提交時顯示的姓名（只需設定一次）' },
+    { c: 'git config --global user.email "你的信箱"', d: '設定提交時顯示的信箱，建議與 GitHub 帳號相同' },
+    { c: 'git config --list', d: '查看目前所有設定' },
+    { c: 'git init', d: '把目前資料夾初始化為 Git 倉庫' },
+    { c: 'git clone https://github.com/帳號/倉庫.git', d: '把遠端倉庫下載到本機' } ] },
+  { g: '日常操作', items: [
+    { c: 'git status', d: '查看哪些檔案被修改、暫存或尚未追蹤' },
+    { c: 'git add 檔名', d: '把檔案加入暫存區（git add . 為加入全部）' },
+    { c: 'git commit -m "說明"', d: '把暫存區內容建立為一次提交' },
+    { c: 'git log --oneline', d: '以一行一筆的方式查看提交歷史' } ] },
+  { g: '分支', items: [
+    { c: 'git branch', d: '列出本機分支，目前分支前有 * 號' },
+    { c: 'git switch -c 分支名', d: '建立並切換到新分支（舊寫法：git checkout -b 分支名）' },
+    { c: 'git switch main', d: '切換回 main 分支' },
+    { c: 'git merge 分支名', d: '把指定分支合併進目前所在的分支' } ] },
+  { g: '遠端同步', items: [
+    { c: 'git remote -v', d: '查看目前連接的遠端倉庫網址' },
+    { c: 'git remote add origin 網址', d: '連接一個遠端倉庫並命名為 origin' },
+    { c: 'git pull --no-rebase --no-edit', d: '取得遠端更新並合併；兩邊都有新提交時也能直接完成合併' },
+    { c: 'git push', d: '把本機提交推送到遠端（第一次推新分支用 git push -u origin 分支名）' },
+    { c: 'git push --force-with-lease', d: '必要時才使用的安全版強制推送：若遠端有你沒看過的提交會拒絕，避免覆蓋他人成果。請勿直接使用 --force', warn: true } ] }
+];
+const OSDIFF = [
+  { d: '列出目前資料夾的檔案', mac: 'ls', win: 'dir' },
+  { d: '列出檔案（包含 .git、.gitignore 等隱藏檔）', mac: 'ls -a', win: 'dir -Force' },
+  { d: '查看目前所在位置', mac: 'pwd', win: 'Get-Location' },
+  { d: '清除終端機畫面', mac: 'clear', win: 'cls' },
+  { d: '切換到桌面', mac: 'cd ~/Desktop', win: 'cd ~\\Desktop' },
+  { d: '建立文字檔', mac: 'echo "內容" > note.txt', win: 'Set-Content -Path note.txt -Value "內容" -Encoding utf8' },
+  { d: '查看檔案內容', mac: 'cat note.txt', win: 'Get-Content -Encoding utf8 note.txt' },
+  { d: '用檔案總管／Finder 開啟目前資料夾', mac: 'open .', win: 'explorer .' },
+  { d: '在 Finder／檔案總管顯示隱藏檔', mac: '在 Finder 按 Command + Shift + .', win: '檔案總管 → 檢視 → 顯示 → 勾選「隱藏的項目」', ui: true }
+];
+function renderCheat() {
+  const content = document.getElementById('content');
+  const section = document.createElement('div');
+  section.className = 'section cheat';
+  section.innerHTML = '<h1>常用指令速查表</h1>' + metaHTML(SECTIONS.find(s=>s.id==='cheat'));
+  CHEAT.forEach(grp => {
+    const h = document.createElement('h2'); h.className = 'cheat-h'; h.textContent = grp.g; section.appendChild(h);
+    const list = document.createElement('div'); list.className = 'cheat-list';
+    grp.items.forEach(it => {
+      const row = document.createElement('div'); row.className = 'cheat-row' + (it.warn ? ' cheat-warn' : '');
+      const desc = document.createElement('div'); desc.className = 'cheat-desc';
+      desc.innerHTML = (it.warn ? '<span class="cw-icon">' + SVG_ALERT + '</span>' : '') + escapeHtml(it.d);
+      row.appendChild(makeCopyBlock(it.c)); row.appendChild(desc); list.appendChild(row);
+    });
+    section.appendChild(list);
+  });
+  const h = document.createElement('h2'); h.className = 'cheat-h'; h.textContent = 'Mac 與 Windows 指令對照'; section.appendChild(h);
+  const note = document.createElement('p'); note.className = 'cheat-note'; note.textContent = 'Git 指令在兩個系統完全相同；不同的是終端機本身的指令。Windows 請使用 PowerShell。'; section.appendChild(note);
+  const tbl = document.createElement('div'); tbl.className = 'osdiff';
+  tbl.innerHTML = '<div class="od-head">用途</div><div class="od-head">Mac（終端機）</div><div class="od-head">Windows（PowerShell）</div>';
+  OSDIFF.forEach(r => {
+    const a = document.createElement('div'); a.className = 'od-desc'; a.textContent = r.d; tbl.appendChild(a);
+    ['mac','win'].forEach(o => {
+      const cell = document.createElement('div'); cell.className = 'od-cell';
+      const lab = document.createElement('span'); lab.className = 'od-os'; lab.textContent = o === 'mac' ? 'Mac' : 'Windows'; cell.appendChild(lab);
+      if (r.ui) { const p = document.createElement('div'); p.className = 'od-ui'; p.textContent = r[o]; cell.appendChild(p); }
+      else cell.appendChild(makeCopyBlock(r[o]));
+      tbl.appendChild(cell);
+    });
+  });
+  section.appendChild(tbl);
+  content.appendChild(section);
 }
 async function runCheck() {
   const owner = document.getElementById('gh-owner').value.trim();
