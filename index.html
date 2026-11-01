@@ -529,6 +529,12 @@ body {
   .od-os { display: block; }
 }
 @media (max-width: 480px) { .osdiff { grid-template-columns: 1fr; } }
+
+/* v17 compact outline cards */
+.overview-card { display: flex; align-items: center; min-height: 64px; }
+.overview-card .oc-head { width: 100%; margin-bottom: 0; flex-wrap: nowrap; }
+.overview-card .oc-head strong { line-height: 1.4; }
+.overview { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important; }
 </style>
 </head>
 <body>
@@ -1205,7 +1211,7 @@ function renderHome() {
     const card = document.createElement('div');
     card.className = 'overview-card';
     card.tabIndex = 0;
-    card.innerHTML = '<div class="oc-head"><strong>' + escapeHtml(c.title) + '</strong><span class="oc-time">' + SVG_CLOCK + escapeHtml(c.time) + '</span></div><div class="oc-learn"><span class="oc-label">做完你會學到：</span>' + escapeHtml(c.learn) + '</div>';
+    card.innerHTML = '<div class="oc-head"><strong>' + escapeHtml(c.title) + '</strong><span class="oc-time">' + SVG_CLOCK + escapeHtml(c.time) + '</span></div>';
     card.onclick = () => goSection(c.id);
     card.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goSection(c.id); } };
     ov.appendChild(card);
