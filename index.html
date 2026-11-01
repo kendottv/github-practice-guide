@@ -555,6 +555,12 @@ body {
 [data-theme="dark"] .cert-bubble { background: #14532d; color: #dcfce7; }
 .check-fail-frog { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
 .check-fail-frog .cert-bubble { font-weight: 500; }
+
+/* v20 tip bubble left overlay */
+.cheat-frog-wrap { position: relative; flex: none; }
+.cheat-tip { position: absolute; margin: 0; right: calc(100% + 14px); top: 50%; transform: translateY(-50%); width: max-content; max-width: min(320px, calc(100vw - 130px)); z-index: 20; animation: tipIn .18s ease-out; }
+.cheat-tip::before { top: 50%; right: -10px; left: auto; margin-top: -8px; border-left: 0; border-top: 2px solid #2ea043; border-right: 2px solid #2ea043; transform: rotate(45deg); }
+@keyframes tipIn { from { opacity: 0; transform: translate(6px, -50%); } to { opacity: 1; transform: translateY(-50%); } }
 </style>
 </head>
 <body>
@@ -1320,7 +1326,7 @@ function renderCheat() {
   const content = document.getElementById('content');
   const section = document.createElement('div');
   section.className = 'section cheat';
-  section.innerHTML = '<div class="cheat-top"><h1>常用指令速查表</h1><button type="button" class="frog-btn cheat-frog" aria-label="青蛙小幫手：點我看一則實用小技巧" aria-expanded="false" aria-controls="cheat-tip"></button></div><div id="cheat-tip" class="cheat-tip" role="status" aria-live="polite" hidden></div>' + metaHTML(SECTIONS.find(s=>s.id==='cheat'));
+  section.innerHTML = '<div class="cheat-top"><h1>常用指令速查表</h1><div class="cheat-frog-wrap"><div id="cheat-tip" class="cheat-tip" role="status" aria-live="polite" hidden></div><button type="button" class="frog-btn cheat-frog" aria-label="青蛙小幫手：點我看一則實用小技巧" aria-expanded="false" aria-controls="cheat-tip"></button></div></div>' + metaHTML(SECTIONS.find(s=>s.id==='cheat'));
   const fb = section.querySelector('.cheat-frog'); fb.appendChild(frogImg('magnify'));
   const tipEl = section.querySelector('#cheat-tip');
   let last = -1;
